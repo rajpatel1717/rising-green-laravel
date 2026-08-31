@@ -46,7 +46,7 @@
 
 @section('content')
     @php
-        $dummyBomImageUrl = url((env('PUBLIC_PATH') ? rtrim(env('PUBLIC_PATH'), '/') . '/' : '') . 'assets/img/logos/crmfavicon.png');
+        $dummyBomImageUrl = url((env('PUBLIC_PATH') ? rtrim(env('PUBLIC_PATH'), '/') . '/' : '') . 'images/template/faveicone.png');
         $bomImageUrl = $bomProduct->image
             ? route('bom-products.image', $bomProduct) . '?v=' . (optional($bomProduct->updated_at)?->timestamp ?? time())
             : $dummyBomImageUrl;
