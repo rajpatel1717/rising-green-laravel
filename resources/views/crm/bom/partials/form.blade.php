@@ -1,5 +1,5 @@
 @php
-    $dummyBomImageUrl = url((env('PUBLIC_PATH') ? rtrim(env('PUBLIC_PATH'), '/') . '/' : '') . 'assets/img/logos/crmfavicon.png');
+    $dummyBomImageUrl = url((env('PUBLIC_PATH') ? rtrim(env('PUBLIC_PATH'), '/') . '/' : '') . 'images/template/faveicone.png');
     $bomPreviewImageUrl = ($product?->image)
         ? route('bom-products.image', $product) . '?v=' . (optional($product?->updated_at)->timestamp ?? time())
         : $dummyBomImageUrl;

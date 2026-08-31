@@ -120,11 +120,17 @@
                                     <input type="text" name="company_tax_id" value="{{ old('company_tax_id', $settings['company_tax_id'] ?? '') }}" class="form-control @error('company_tax_id') is-invalid @enderror">
                                     @error('company_tax_id')<div class="profile-field-error">{{ $message }}</div>@enderror
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <label class="form-label fw-semibold">Company Logo (Upload)</label>
                                     <input type="file" name="company_logo_path" id="company-logo-input" accept="image/jpeg,image/png,image/jpg" class="form-control @error('company_logo_path') is-invalid @enderror">
                                     @error('company_logo_path')<div class="profile-field-error">{{ $message }}</div>@enderror
                                     <small class="text-muted">JPG or PNG image - max 50 MB.</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Sidebar Icon (Upload)</label>
+                                    <input type="file" name="sidebar_icon_path" id="sidebar-icon-input" accept="image/jpeg,image/png,image/jpg" class="form-control @error('sidebar_icon_path') is-invalid @enderror">
+                                    @error('sidebar_icon_path')<div class="profile-field-error">{{ $message }}</div>@enderror
+                                    <small class="text-muted">Any image file - max 50 MB. (Used for small sidebar icon)</small>
                                 </div>
                                 <!-- <div class="col-md-6">
                                     <label class="form-label fw-semibold">QR Code (Upload)</label>

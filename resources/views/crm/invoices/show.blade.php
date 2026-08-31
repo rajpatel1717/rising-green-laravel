@@ -414,7 +414,7 @@
                                                     $qty_unit = '(mtr)';
                                                 }
 
-                                                $dummyBomImageUrl = url((env('PUBLIC_PATH') ? rtrim(env('PUBLIC_PATH'), '/') . '/' : '') . 'assets/img/logos/crmfavicon.png');
+                                                $dummyBomImageUrl = url((env('PUBLIC_PATH') ? rtrim(env('PUBLIC_PATH'), '/') . '/' : '') . 'images/template/faveicone.png');
                                                 $productImageUrl = ($full_product_details && !empty($full_product_details['image']) && $product_id)
                                                     ? route('bom-products.image', $product_id)
                                                     : $dummyBomImageUrl;

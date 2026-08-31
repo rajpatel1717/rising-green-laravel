@@ -119,6 +119,17 @@ class ProfileController extends Controller
         return Response::file(Storage::disk('public')->path($path));
     }
 
+    public function sidebarIconImage()
+    {
+        $path = Setting::query()->where('key', 'sidebar_icon_path')->value('value');
+
+        if (!$path || !Storage::disk('public')->exists($path)) {
+            abort(404);
+        }
+
+        return Response::file(Storage::disk('public')->path($path));
+    }
+
     public function companyQrCodeImage()
     {
         $path = Setting::query()->where('key', 'company_qr_code_path')->value('value');
@@ -220,6 +231,7 @@ class ProfileController extends Controller
             'company_tax_id' => ['nullable', 'string', 'max:255'],
             'avatar' => ['nullable', 'file', $imageFileRule, 'max:51200'],
             'company_logo_path' => ['nullable', 'file', $imageFileRule, 'max:51200'],
+            'sidebar_icon_path' => ['nullable', 'file', $imageFileRule, 'max:51200'],
             'company_qr_code_path' => ['nullable', 'file', $imageFileRule, 'max:51200'],
             'social_instagram' => ['nullable', 'string', 'max:255'],
             'social_facebook' => ['nullable', 'string', 'max:255'],
@@ -231,6 +243,7 @@ class ProfileController extends Controller
             'company_address.required' => 'Address is required!',
             'avatar.max' => 'Profile image must not be larger than 50 MB.',
             'company_logo_path.max' => 'Company logo must not be larger than 50 MB.',
+            'sidebar_icon_path.max' => 'Sidebar icon must not be larger than 50 MB.',
             'company_qr_code_path.max' => 'QR Code must not be larger than 50 MB.',
         ]);
 
@@ -244,7 +257,7 @@ class ProfileController extends Controller
 
         $userData = collect($data)->except([
             'company_name', 'company_tagline', 'company_address', 'company_tax_id', 
-            'avatar', 'company_logo_path', 'company_qr_code_path',
+            'avatar', 'company_logo_path', 'sidebar_icon_path', 'company_qr_code_path',
             'social_instagram', 'social_facebook', 'social_linkedin'
         ])->all();
         $user->update($userData);
@@ -278,6 +291,19 @@ class ProfileController extends Controller
             Setting::updateOrCreate(
                 ['key' => 'company_logo_path'],
                 ['value' => $logoPath, 'group' => 'general', 'type' => 'string']
+            );
+        }
+
+        if ($request->hasFile('sidebar_icon_path')) {
+            $oldIcon = Setting::query()->where('key', 'sidebar_icon_path')->value('value');
+            if ($oldIcon && Storage::disk('public')->exists($oldIcon)) {
+                Storage::disk('public')->delete($oldIcon);
+            }
+
+            $iconPath = $request->file('sidebar_icon_path')->store('company', 'public');
+            Setting::updateOrCreate(
+                ['key' => 'sidebar_icon_path'],
+                ['value' => $iconPath, 'group' => 'general', 'type' => 'string']
             );
         }
 
