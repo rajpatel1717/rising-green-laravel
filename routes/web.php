@@ -331,6 +331,7 @@ Route::middleware(['auth', 'no.cache'])->group(function () {
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
     Route::get('/profile/company-logo-image', [ProfileController::class, 'companyLogoImage'])->name('profile.company_logo.image');
+    Route::get('/profile/sidebar-icon-image', [ProfileController::class, 'sidebarIconImage'])->name('profile.sidebar_icon.image');
     Route::get('/profile/company-qr-code-image', [ProfileController::class, 'companyQrCodeImage'])->name('profile.company_qr_code.image');
 
     // Users & Roles

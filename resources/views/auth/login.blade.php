@@ -29,7 +29,7 @@
                             <!-- Header -->
                             <div class="text-center mb-1">
                                 <img src="{{ asset('images/template/Fablead logo.jpg') }}" alt="Fablead CRM"
-                                    style="max-width:130px;" class="img-fluid mb-2"
+                                    style="max-width:200px;" class="img-fluid mb-2"
                                     onerror="this.onerror=null;this.src='{{ url('public/images/template/Fablead logo.jpg') }}';">
                                 <p class="text-muted mb-0" style="font-size: 1rem;">Welcome to Fablead CRM, Empowering your
                                     solar business with a smart, all-in-one CRM.</p>

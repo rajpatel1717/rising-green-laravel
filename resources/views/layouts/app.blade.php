@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -290,6 +291,11 @@
                     $mainLogoUrl = $mainLogoPath && \Illuminate\Support\Facades\Storage::disk('public')->exists($mainLogoPath)
                         ? route('profile.company_logo.image') . '?v=' . \Illuminate\Support\Facades\Storage::disk('public')->lastModified($mainLogoPath)
                         : url((env('PUBLIC_PATH') ? rtrim(env('PUBLIC_PATH'), '/') . '/' : '') . 'logo/fableadcrmLogo.png');
+
+                    $sidebarIconPath = \App\Models\Setting::where('key', 'sidebar_icon_path')->value('value');
+                    $sidebarIconUrl = $sidebarIconPath && \Illuminate\Support\Facades\Storage::disk('public')->exists($sidebarIconPath)
+                        ? route('profile.sidebar_icon.image') . '?v=' . \Illuminate\Support\Facades\Storage::disk('public')->lastModified($sidebarIconPath)
+                        : url((env('PUBLIC_PATH') ? rtrim(env('PUBLIC_PATH'), '/') . '/' : '') . 'images/template/crmfavicon.png');
                 @endphp
                 <div class="sidenav-header sidebar-logo-header">
                     <a class="navbar-brand sidebar-logo-panel m-0 d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
@@ -300,7 +306,7 @@
 
                 <div class="sidenav-header" style="padding: 0px 8px;">
                     <div class="profile-card brand-card">
-                        <img src="{{ url((env('PUBLIC_PATH') ? rtrim(env('PUBLIC_PATH'), '/') . '/' : '') . 'images/template/crmfavicon.png') }}"
+                        <img src="{{ $sidebarIconUrl }}"
                             class="brand-logo-icon" alt="Rising Green Energy Logo">
                         <span class="brand-logo-text capitalize" title="{{ $authUser?->name ?? 'Rising Green Energy' }}">{{ strtoupper($authUser?->name ?? 'Rising Green Energy') }}</span>
                     </div>
